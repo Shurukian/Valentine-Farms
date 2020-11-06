@@ -13,6 +13,7 @@ const router = express.Router()
 
 // CREATE /product
 router.post('/product', requireToken, (req, res, next) => {
+  // Create an owner id based off of the current user
   req.body.product.owner = req.user.id
 
   Product.create(req.body.product)
@@ -40,7 +41,7 @@ router.patch('/product', requireToken, (req, res, next) => {
 })
 
 // INDEX /product
-router.get('/product', (req, res, next) => {
+router.get('/product', requireToken, (req, res, next) => {
   Product.find()
     .then(product => {
       return product.map(product => product.toObject())
@@ -54,7 +55,7 @@ router.delete('/product/:id', requireToken, (req, res, next) => {
   Product.findById(req.params.id)
     .then(handle404)
     .then(product => {
-      // requireOwnership(req, product)
+      requireOwnership(req, product)
 
       product.deleteOne()
     })
