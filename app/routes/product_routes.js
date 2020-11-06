@@ -40,7 +40,7 @@ router.patch('/product', requireToken, (req, res, next) => {
 })
 
 // INDEX /product
-router.get('/products', requireToken, (req, res, next) => {
+router.get('/product', (req, res, next) => {
   Product.find()
     .then(product => {
       return product.map(product => product.toObject())
@@ -50,7 +50,7 @@ router.get('/products', requireToken, (req, res, next) => {
 })
 
 // DESTROY /product
-router.delete('/products/:id', requireToken, (req, res, next) => {
+router.delete('/product/:id', requireToken, (req, res, next) => {
   Product.findById(req.params.id)
     .then(handle404)
     .then(product => {
