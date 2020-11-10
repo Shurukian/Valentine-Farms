@@ -10,7 +10,7 @@ const productSchema = new mongoose.Schema({
     required: true
   },
   isOrganic: {
-    type: Boolean,
+    type: String,
     required: true
   },
   quantity: {

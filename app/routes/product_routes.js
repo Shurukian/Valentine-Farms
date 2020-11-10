@@ -12,9 +12,10 @@ const requireToken = passport.authenticate('bearer', { session: false })
 const router = express.Router()
 
 // CREATE /product
-router.post('/product', requireToken, (req, res, next) => {
+router.post('/products', requireToken, (req, res, next) => {
   // Create an owner id based off of the current user
   req.body.product.owner = req.user.id
+  console.log('Create is firing on the backend')
 
   Product.create(req.body.product)
   // show that the product has been created.
@@ -25,7 +26,7 @@ router.post('/product', requireToken, (req, res, next) => {
 })
 
 // UPDATE /product
-router.patch('/product', requireToken, (req, res, next) => {
+router.patch('/products/:id', requireToken, (req, res, next) => {
   delete req.body.product.owner
 
   Product.findById(req.params.id)
@@ -41,17 +42,17 @@ router.patch('/product', requireToken, (req, res, next) => {
 })
 
 // INDEX /product
-router.get('/product', requireToken, (req, res, next) => {
+router.get('/products', requireToken, (req, res, next) => {
   Product.find()
-    .then(product => {
-      return product.map(product => product.toObject())
+    .then(products => {
+      return products.map(product => product.toObject())
     })
     .then(products => res.status(200).json({ products: products }))
     .catch(next)
 })
 
 // DESTROY /product
-router.delete('/product/:id', requireToken, (req, res, next) => {
+router.delete('/products/:id', requireToken, (req, res, next) => {
   Product.findById(req.params.id)
     .then(handle404)
     .then(product => {
