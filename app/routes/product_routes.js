@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const customErrors = ('../../lib/custom_errors')
+const customErrors = require('../../lib/custom_errors')
 const handle404 = customErrors.handle404
 const requireOwnership = customErrors.requireOwnership
 
@@ -32,12 +32,12 @@ router.patch('/products/:id', requireToken, (req, res, next) => {
   Product.findById(req.params.id)
     .then(handle404)
     .then(product => {
+      console.log('some string', customErrors)
       requireOwnership(req, product)
 
       return product.updateOne(req.body.product)
     })
     .then(() => res.sendStatus(204))
-
     .catch(next)
 })
 
