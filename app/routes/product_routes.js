@@ -15,7 +15,7 @@ const router = express.Router()
 router.post('/products', requireToken, (req, res, next) => {
   // Create an owner id based off of the current user
   req.body.product.owner = req.user.id
-  console.log('Create is firing on the backend')
+  // console.log('Create is firing on the backend')
 
   Product.create(req.body.product)
   // show that the product has been created.
@@ -32,7 +32,7 @@ router.patch('/products/:id', requireToken, (req, res, next) => {
   Product.findById(req.params.id)
     .then(handle404)
     .then(product => {
-      console.log('some string', customErrors)
+      // console.log('some string', customErrors)
       requireOwnership(req, product)
 
       return product.updateOne(req.body.product)
