@@ -7,9 +7,10 @@ looking to buy or sell things at a farmers market.
 
 ## Important Links
 
+* [Heroku Hosted Deployed API](http://radiant-sierra-98996.herokuapp.com)
+* [Back-End Repo](https://github.com/Shurukian/Valentine-Farms)
 * [Deployed Front-End](https://shurukian.github.io/Valentine-Farms-client/)
 * [Front-End Repo](https://github.com/Shurukian/Valentine-Farms-client)
-* [Heroku Hosted Deployed API](http://radiant-sierra-98996.herokuapp.com)
 
 ## Technologies Used
 
